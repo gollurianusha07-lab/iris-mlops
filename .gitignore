@@ -6,7 +6,4 @@ __pycache__/
 .DS_Store
 /iris.csv
 # Generated model artifacts and logs
-model.keras
-scaler.pkl
-encoder.pkl
 training_log.txt
