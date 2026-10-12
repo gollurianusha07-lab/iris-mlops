@@ -1,0 +1,36 @@
+
+name: Iris ML Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "iris.csv"
+      - "iris.csv.dvc"
+      - "train_pipeline.py"
+      - "requirements.txt"
+      - ".github/workflows/train.yml"
+  workflow_dispatch:
+
+jobs:
+  train-and-evaluate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Verify dataset
+        run: test -f iris.csv
+
+      - name: Train and evaluate model
+        run: python train_pipeline.py
